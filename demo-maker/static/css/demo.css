@@ -1,0 +1,229 @@
+html,
+body {
+  height: 100%;
+  background: #F1F1F1;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -60px;
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+}
+
+h1 {color:#158B71}
+h2 {color:#158B71}
+
+.hh {display:none}
+.rr {float:right}
+.ll {float:left}
+
+.btn-primary{
+    background:#DC151A;
+    border:#B43429
+}
+
+.btn-primary:hover{
+    background:#B43429;
+    border:#DC151A
+}
+
+.btn-default{
+    color:#CCC;
+    background:#EEE
+}
+
+.btn-default:hover{
+    color:#333;
+    background:#CCC
+}
+
+.btn-info{
+    color:#EFC616;
+    background:#16559A;
+}
+
+ul.messenger.messenger-fixed.messenger-on-bottom {
+  bottom: 20%;
+}
+
+.app-icon{
+    margin:8px;
+}
+
+a {
+  color:#FFF;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #CCC;
+  text-decoration: none;
+}
+
+.act-hh{
+    display: none;
+}
+
+.act-rr{
+	position: relative;
+    left: 77px;
+    top: -97px;
+}
+
+.act-rl{
+	position: relative;
+    left: 77px;
+    top: -66px;
+}
+
+.laucher-icon{
+    width:96px;
+    height:96px;
+    font-size:14px;
+    text-align:center;
+    color:#EFC616;
+}
+
+.laucher-icon img{
+    margin:8px;
+}
+
+.app-icon:hover .act-hh{
+    display: block;
+}
+
+.app-icon .btn{
+    width:96px;
+    height:96px;
+    font-size:36px;
+}
+
+.app-icon-add .btn{
+    margin:8px;
+    width:340px;
+    height:60px;
+    font-size:36px;
+}
+
+.main-sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    background:#16559A;
+    color: #f5f5f5;
+    padding: 5px;
+}
+
+.main-sidebar a.brand{
+    font-size: 20px;
+	color: #FA6900;
+}
+
+.main-sidebar a{
+	color: #656a74;
+	display: block;
+	padding: 10px 10px 10px 15px;
+}
+
+.main-sidebar a:hover{
+	text-decoration: none;
+    color: #E0E4CC;
+}
+
+
+.main-sidebar .sidebar-footer{
+	position: fixed;
+	width: 200px;
+	bottom: 0;
+}
+
+.main-content{
+    margin-left: 200px;
+    padding: 20px;
+    position: relative;
+    width: auto;
+}
+
+.main-content .container{
+    margin: 0;
+    width: auto;
+}
+
+.app-page{
+    float:left;
+    margin:0 40px 20px 0;
+    border: 1px solid #EFC616;
+    background: #158B71;
+    padding: 1px;
+}
+
+.page-title{
+    font-size: 20px;
+    text-align: center;
+    margin: 2px;
+}
+
+.page-toolbar .btn{
+    margin: 2px 1px 2px 0px;
+    font-size: 18px;
+}
+
+.page-bg {
+    text-align: center;
+}
+
+.parent-img{
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.page-bg .page-img{
+    z-index: 2;
+}
+
+.page-subpage{
+    border: 1px solid #B43429;
+}
+
+.page-subpage:hover .act-hh{
+    display: block;
+}
+
+.subpage-img{
+}
+
+.page-action:hover .act-hh{
+    display: block;
+}
+
+#page-list {
+    position: relative;
+}
+
+.qrcode{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.qrcode img{
+    padding-bottom: 5px;
+}
+.apk-download{
+    padding: 5px 0px 0px 28px;
+}
+
+#apps-title:hover .act-hh{
+    display:inline;
+}
+
+.list-wrapper:hover .act-hh{
+    display: block;
+}

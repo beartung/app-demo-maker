@@ -1,0 +1,35 @@
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <title>${self.title()} · Demo</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+        <link rel="stylesheet" href="/static/css/bootstrap-3.0.3.min.css">
+        <link rel="stylesheet" href="/static/css/messenger.css">
+        <link rel="stylesheet" href="/static/css/messenger-theme-air.css">
+        <link rel="stylesheet" href="/static/css/demo.css">
+        ${self.head_script()}
+        <%block name="extra_head"></%block>
+    </head>
+    <body>
+        <div id="wrap">
+        ${self.body()}
+        </div>
+        <div id="footer">
+            <div class="container">
+                <p class="text-muted">
+                <img class="footer-logo" src="/static/img/logo.png" width="24" height="24" alt="Demo">
+                <span style="padding: 10px">bear@douban.com</span>
+                </p>
+            </div>
+        </div>
+        <script src="/static/js/jquery-1.10.2.min.js"></script>
+        <script src="/static/js/bootstrap-3.0.3.min.js"></script>
+        <script src="/static/js/messenger.min.js"></script>
+        <script src="/static/js/messenger-theme-future.js"></script>
+        <script>${self.body_script()}</script>
+    </body>
+</html>
+
+<%def name="title()"></%def>
+<%def name="head_script()"></%def>
+<%def name="body_script()"></%def>
