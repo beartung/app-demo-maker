@@ -39,7 +39,7 @@ def _q_index(req):
             page_id = Page.new(app, name, rect, filename, parent_id, page_type)
             if req.get_form_var("output", None) == 'json':
                 req.response.set_content_type('application/json; charset=utf-8')
-                ret = { 'err': 'ok', 'html': stf('/app.html', 'page_list', app=app) }
+                ret = { 'err': 'ok', 'html': stf('/app.html', 'page_list', app=app, req=req) }
                 return json.dumps(ret)
     else:
         rect = Rect(0, x*app.zoomout, y*app.zoomout, w*app.zoomout, h*app.zoomout)
@@ -93,7 +93,7 @@ class PageUI(object):
                     rect = Rect.get(Rect.new(x, y, w, h))
                     Action.new(page.id, rect, type, dismiss, to_page_id)
                     ret = { 'err': 'ok' }
-                    ret['html'] = stf('/app.html', 'page_worktable', p=page)
+                    ret['html'] = stf('/app.html', 'page_worktable', p=page, req=req)
                     return json.dumps(ret)
         return AccessError("need owner")
 

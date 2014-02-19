@@ -64,7 +64,6 @@ class AppUI(object):
         if req.get_form_var("output", None) == 'json':
             req.response.set_content_type('application/json; charset=utf-8')
             return json.dumps(app.json_dict)
-        is_admin = app.can_admin(req.user)
         return st('/app.html', **locals())
 
     def remove(self, req):

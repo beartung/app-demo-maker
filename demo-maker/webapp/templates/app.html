@@ -34,7 +34,7 @@ from webapp.models.page import Action, Page
                 <p>${app.name}</p>
             </div>
             <br>
-            %if is_admin:
+            %if app.can_admin(req.user):
             <ul class="nav nav-pills nav-stacked">
                 <li>
                 <button class="btn btn-block btn-primary btn-new-page" type="button"
@@ -84,7 +84,7 @@ from webapp.models.page import Action, Page
 <%def name="page_worktable(p)">
 <div class="page-title clearfix">
     ${p.name} #P${p.id}
-    %if is_admin:
+    %if p.app.can_admin(req.user):
     <button type="button" class="btn btn-default ll" onclick="check_remove('${p.id}')">
         <i class="glyphicon glyphicon-remove"></i>
     </button>
@@ -134,7 +134,7 @@ from webapp.models.page import Action, Page
             %endfor
             </div>
         </div>
-        %if is_admin:
+        %if p.app.can_admin(req.user):
         <div class="rr act-hh">
         <a style="color:#B43429" onclick="check_remove('${sp.id}')">
             <i class="glyphicon glyphicon-remove" style="font-size:16px;padding-left:16px;"></i>
@@ -170,7 +170,7 @@ from webapp.models.page import Action, Page
             %endif
         </span>
         <i class="glyphicon ${a.type_icon}" style="position:absolute;top:${a.rect.height/2-12}px;left:${a.rect.width/2-12}px"></i>
-        %if is_admin:
+        %if p.app.can_admin(req.user):
         <a class="rr act-hh" style="color:#B43429" onclick="check_remove_action('${p.id}', '${a.id}')">
             <i class="glyphicon glyphicon-remove" style="font-size:16px;padding-left:16px;"></i>
         </a>
@@ -193,7 +193,7 @@ from webapp.models.page import Action, Page
     %endif
 %endif
 %endif
-%if is_admin:
+%if p.app.can_admin(req.user):
 <div id="toolbar-${p.id}" class="page-toolbar clearfix">
     %if p.type not in [Page.TYPE_ITEM, Page.TYPE_DIALOG]:
     <button type="button" class="btn btn-info ll btn-new-page"
