@@ -21,7 +21,9 @@ from webapp.models.page import Action, Page
                     <div>Demo Maker</div>
                 </a>
             </div>
+            %if user:
             <a href="/" class="btn btn-block btn-success">我的应用</a>
+            %endif
 
             <a class="btn btn-block btn-success"
                 href="http://andariel.douban.com/d/com.demo.maker" target="_blank">下载Apk</a>
@@ -32,6 +34,7 @@ from webapp.models.page import Action, Page
                 <p>${app.name}</p>
             </div>
             <br>
+            %if is_admin:
             <ul class="nav nav-pills nav-stacked">
                 <li>
                 <button class="btn btn-block btn-primary btn-new-page" type="button"
@@ -43,6 +46,7 @@ from webapp.models.page import Action, Page
                     >新建页面</button>
                 </li>
             </ul>
+            %endif
             <div class="qrcode">
                 <img src="${app.path}/qrcode"/>
                 <p>扫描开始演示</p>
@@ -80,12 +84,14 @@ from webapp.models.page import Action, Page
 <%def name="page_worktable(p)">
 <div class="page-title clearfix">
     ${p.name} #P${p.id}
+    %if is_admin:
     <button type="button" class="btn btn-default ll" onclick="check_remove('${p.id}')">
         <i class="glyphicon glyphicon-remove"></i>
     </button>
     <button id="btn-add-${p.id}" type="button" class="btn btn-primary rr" onclick="toggle_action('${p.id}')">
         <i class="glyphicon glyphicon-plus"></i>
     </button>
+    %endif
 </div>
 %if p.type != Page.TYPE_ITEM:
 <div class="page-bg">
@@ -128,6 +134,7 @@ from webapp.models.page import Action, Page
             %endfor
             </div>
         </div>
+        %if is_admin:
         <div class="rr act-hh">
         <a style="color:#B43429" onclick="check_remove('${sp.id}')">
             <i class="glyphicon glyphicon-remove" style="font-size:16px;padding-left:16px;"></i>
@@ -143,6 +150,7 @@ from webapp.models.page import Action, Page
             <i class="glyphicon glyphicon-plus" style="font-size:16px;padding-left:16px;"></i>
         </a>
         </div>
+        %endif
     </div>
     %endif
     %endfor
@@ -162,9 +170,11 @@ from webapp.models.page import Action, Page
             %endif
         </span>
         <i class="glyphicon ${a.type_icon}" style="position:absolute;top:${a.rect.height/2-12}px;left:${a.rect.width/2-12}px"></i>
+        %if is_admin:
         <a class="rr act-hh" style="color:#B43429" onclick="check_remove_action('${p.id}', '${a.id}')">
             <i class="glyphicon glyphicon-remove" style="font-size:16px;padding-left:16px;"></i>
         </a>
+        %endif
     </div>
     %endfor
 </div>
@@ -183,6 +193,7 @@ from webapp.models.page import Action, Page
     %endif
 %endif
 %endif
+%if is_admin:
 <div id="toolbar-${p.id}" class="page-toolbar clearfix">
     %if p.type not in [Page.TYPE_ITEM, Page.TYPE_DIALOG]:
     <button type="button" class="btn btn-info ll btn-new-page"
@@ -282,6 +293,7 @@ from webapp.models.page import Action, Page
         </ul>
     </div>
 </div>
+%endif
 </%def>
 
 <%def name="page_form(app, rect, parent, page_type)">
