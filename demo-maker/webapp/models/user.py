@@ -48,6 +48,11 @@ class User(object):
         if r and r[0]:
             return cls(*r[0])
 
+    @classmethod
+    def count(cls):
+        r = store.execute("select count(id) from demo_user")
+        return r and r[0][0]
+
     def update_session(self, session):
         store.execute("update demo_user set `session`=%s where id=%s", (session, self.id))
         store.commit()

@@ -1,0 +1,45 @@
+<%!
+from webapp.models.app import DEFAULT_SCREEN
+%>
+
+<%inherit file="/base.html" />
+
+<%def name="title()">Admin</%def>
+
+<%def name="body()">
+<div class="container">
+    <h2>控制台</h2>
+    <hr>
+    <p>当前有${user_count}个用户，${app_count}个应用。</p>
+    <h3>设备屏幕</h3>
+    <p>屏幕高度，需要扣除状态栏和虚拟键。</p>
+    <table class="table table-striped">
+        <th><td>名称</td><td>系统</td><td>屏幕宽</td><td>屏幕高</td>
+            <td>图标宽</td><td>图标高</td><td>虚拟键</td></th>
+        %for s in screens:
+        <tr><td>${s.id}</td><td>${s.name}</td><td>${s.os}</td><td>${s.width}</td><td>${s.height}</td>
+            <td>${s.icon_width}</td><td>${s.icon_height}</td><td>${s.virtual_keys}</td></tr>
+        %endfor
+    </table>
+    <h3>新建屏幕</h3>
+    <div>
+    <form id="new-form" role="form" class="form" method="post" action="/admin">
+        <input name="name" type="text" class="form-control" placeholder="设备名称" value="">
+        <input name="w" type="text" class="form-control" placeholder="屏幕宽" value="">
+        <input name="h" type="text" class="form-control" placeholder="屏幕高" value="">
+        <input name="iw" type="text" class="form-control" placeholder="图标宽" value="">
+        <input name="ih" type="text" class="form-control" placeholder="图标高" value="">
+        <select name="os" class="form-control">
+            <option value="android">android</option>
+            <option value="iOS">iOS</option>
+        </select>
+        <select name="vk" class="form-control">
+            <option value="Y">有虚拟键</option>
+            <option value="N">无虚拟键</option>
+        </select>
+        <br>
+        <input name="submit" type="submit" class="btn btn-primary" value="新加设备屏幕">
+    </form>
+    </div>
+</div>
+</%def>

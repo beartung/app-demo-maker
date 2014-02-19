@@ -257,3 +257,8 @@ class App(object):
             pages[p.id] = p.json_dict
         d['pages'] = pages
         return d
+
+    @classmethod
+    def count(cls):
+        r = store.execute("select count(id) from demo_app")
+        return r and r[0][0]

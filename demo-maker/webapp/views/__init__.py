@@ -8,7 +8,30 @@ from webapp.models.app import App, Screen, DEFAULT_SCREEN
 
 from webapp.views.utils import is_validate_email, check_session, set_session, expire_session
 
-_q_exports = ["login", "app", "page", "mpage", "logout"]
+_q_exports = ["login", "app", "page", "mpage", "logout", "admin"]
+
+
+def admin(req):
+    if not req.user:
+        return req.redirect('/login')
+    if req.user.email == "beartung@gmail.com":
+        if req.get_method() == "POST":
+            name = req.get_form_var("name", None)
+            os = req.get_form_var("os", None)
+            w = req.get_form_var("w", 0)
+            h = req.get_form_var("h", 0)
+            iw = req.get_form_var("iw", 0)
+            ih = req.get_form_var("ih", 0)
+            vk = req.get_form_var("vk", None)
+            if name and os:
+                id = Screen.new(name, os, w, h, iw, ih, vk == 'Y')
+                if id:
+                    return req.redirect("/admin")
+        user_count = User.count()
+        app_count = App.count()
+        screens = Screen.gets()
+        return st("/admin.html", **locals())
+    raise AccessError("not admin")
 
 def logout(req):
     expire_session(req)
