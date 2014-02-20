@@ -12,3 +12,19 @@ tmpdir
 # Editor
 *.sw[op]
 local_config.py
+
+gen
+bin
+target
+.idea
+.settings
+*.iml
+.classpath
+.project
+out
+classes
+gen-external-apklibs
+local.properties
+.DS_Store
+.gradle
+build/
