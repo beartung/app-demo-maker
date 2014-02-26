@@ -598,6 +598,14 @@ function check_action_form(page_id){
             "dismiss": dismiss,
         }, function(r){
             $('#page-'+page_id).html(r.html);
+            var jcrop_api = actions[page_id];
+            var btn = $('#btn-add-'+page_id);
+            if (jcrop_api){
+                btn.html('<i class="glyphicon glyphicon-plus"></i>');
+                jcrop_api.release();
+                delete actions[page_id];
+                return;
+            }
         });
     $('#new-action-dialog').modal('hide');
 }
