@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>FA00B89E-5C38-459A-AF62-01C5EDE06A5D</string>
+	<string>B5142920-FFB7-456E-A1A8-751F21587C64</string>
 	<key>IDESourceControlProjectName</key>
 	<string>maker</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4E653AAA-4BD2-4876-87BD-AF507D7C6FDC</key>
-		<string>http://code.dapps.douban.com/bear/demo-maker-iOS.git</string>
+		<key>D9D57E3B-795F-4E58-952F-5E5E8C86699E</key>
+		<string>http://code.dapps.douban.com/bear/app-demo-maker.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>maker.xcworkspace</string>
+	<string>iOS/maker.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4E653AAA-4BD2-4876-87BD-AF507D7C6FDC</key>
-		<string>..</string>
+		<key>D9D57E3B-795F-4E58-952F-5E5E8C86699E</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>http://code.dapps.douban.com/bear/demo-maker-iOS.git</string>
+	<string>http://code.dapps.douban.com/bear/app-demo-maker.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4E653AAA-4BD2-4876-87BD-AF507D7C6FDC</string>
+	<string>D9D57E3B-795F-4E58-952F-5E5E8C86699E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4E653AAA-4BD2-4876-87BD-AF507D7C6FDC</string>
+			<string>D9D57E3B-795F-4E58-952F-5E5E8C86699E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>demo-maker-iOS</string>
+			<string>app-demo-maker</string>
 		</dict>
 	</array>
 </dict>
