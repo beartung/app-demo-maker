@@ -210,51 +210,52 @@ public class Runner extends Activity implements View.OnClickListener, View.OnTou
             PageFragment f = (PageFragment)m.findFragmentByTag(fromPageId);
             try{
                 if (a.dismiss || a.toPageId.equals(f.refer)){
-                    if (a.fromPageId.equals(rootId)){
+                    if (a.fromPageId.equals(rootId) && a.toPageId.equals("0")){
                         finish();
                     }else{
                         Log.d(TAG, "detach " + f.id);
+                        rootId = a.toPageId;
+                        m.popBackStackImmediate();
                         m.beginTransaction().detach(f).commit();
                     }
-                }else{
-                    f = (PageFragment)m.findFragmentByTag(a.toPageId);
-                    FragmentTransaction ft;
-                    if (f == null){
-                        f = new PageFragment();
-                        f.env = env;
-                        f.id = a.toPageId;
-                        f.refer = a.fromPageId;
-                        Log.d(TAG, "add " + f.id);
-                        ft = m.beginTransaction();
+                }
+                f = (PageFragment)m.findFragmentByTag(a.toPageId);
+                FragmentTransaction ft;
+                if (f == null){
+                    f = new PageFragment();
+                    f.env = env;
+                    f.id = a.toPageId;
+                    f.refer = a.fromPageId;
+                    Log.d(TAG, "add " + f.id);
+                    ft = m.beginTransaction();
 
-                        int in = 0;
-                        int out = 0;
-                        if (Env.ACTION_TYPE_SLIDE.contains(a.type)){
-                            if (a.type.equals(Env.ACTION_TYPE_SLIDE_LEFT)){
-                                in = R.anim.slide_in_left;
-                                out = R.anim.slide_out_right;
-                            }else if (a.type.equals(Env.ACTION_TYPE_SLIDE_RIGHT)){
-                                in = R.anim.slide_in_right;
-                                out = R.anim.slide_out_left;
-                            }else if (a.type.equals(Env.ACTION_TYPE_SLIDE_UP)){
-                                in = R.anim.slide_in_up;
-                                out = R.anim.slide_out_down;
-                            }else if (a.type.equals(Env.ACTION_TYPE_SLIDE_DOWN)){
-                                in = R.anim.slide_in_down;
-                                out = R.anim.slide_out_up;
-                            }
-
-                            Log.d(TAG, "use CustomAnimations " + f.id);
-                            ft.setCustomAnimations(in, 0, 0, out);
+                    int in = 0;
+                    int out = 0;
+                    if (Env.ACTION_TYPE_SLIDE.contains(a.type)){
+                        if (a.type.equals(Env.ACTION_TYPE_SLIDE_LEFT)){
+                            in = R.anim.slide_in_left;
+                            out = R.anim.slide_out_right;
+                        }else if (a.type.equals(Env.ACTION_TYPE_SLIDE_RIGHT)){
+                            in = R.anim.slide_in_right;
+                            out = R.anim.slide_out_left;
+                        }else if (a.type.equals(Env.ACTION_TYPE_SLIDE_UP)){
+                            in = R.anim.slide_in_up;
+                            out = R.anim.slide_out_down;
+                        }else if (a.type.equals(Env.ACTION_TYPE_SLIDE_DOWN)){
+                            in = R.anim.slide_in_down;
+                            out = R.anim.slide_out_up;
                         }
 
-                        ft.add(android.R.id.content, f, f.id).addToBackStack(null);
-                    }else{
-                        Log.d(TAG, "attach " + f.id);
-                        ft = m.beginTransaction().attach(f);
+                        Log.d(TAG, "use CustomAnimations " + f.id);
+                        ft.setCustomAnimations(in, 0, 0, out);
                     }
-                    ft.commit();
+
+                    ft.add(android.R.id.content, f, f.id).addToBackStack(null);
+                }else{
+                    Log.d(TAG, "attach " + f.id);
+                    ft = m.beginTransaction().attach(f);
                 }
+                ft.commit();
             }catch (Exception e){
                 e.printStackTrace();
             }
