@@ -25,17 +25,18 @@
     NSLog(@"%@", NSStringFromCGRect(workSpaceRect));
     
     //only test
+    /*
     NSString * url = @"http://m.dapps.douban.com/app/18/?output=json";
     DBDemoViewController * dc = [[DBDemoViewController alloc] initWithUrl:url];
     self.window.rootViewController = dc;
+     */
+
     
-    /*
     DBQRViewController * qrc = [[DBQRViewController alloc] init];
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:qrc];
     nav.navigationBar.hidden = YES;
     nav.modalPresentationStyle = UIModalPresentationCurrentContext;
     self.window.rootViewController = nav;
-     */
     
     self.window.backgroundColor = [UIColor blackColor];
     
