@@ -1,0 +1,35 @@
+PODS:
+  - AFNetworking (2.1.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.1.0):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.1.0)
+  - AFNetworking/Security (2.1.0)
+  - AFNetworking/Serialization (2.1.0)
+  - AFNetworking/UIKit (2.1.0):
+    - AFNetworking/NSURLConnection
+  - DoubanObjCFileManager (1.0.2)
+  - SDWebImage (3.5.2):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.5.2)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.1.0)
+  - DoubanObjCFileManager (~> 1.0.2)
+  - SDWebImage (~> 3.5.2)
+
+SPEC CHECKSUMS:
+  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  DoubanObjCFileManager: 81e4fd79d47212d7935f5f49f38b2b2a471b8b74
+  SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
+
+COCOAPODS: 0.29.0

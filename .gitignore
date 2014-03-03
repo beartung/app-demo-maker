@@ -28,3 +28,6 @@ local.properties
 .DS_Store
 .gradle
 build/
+
+*.pbxuser
+xcuserdata
