@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DemoMaker</title>
+<link rel="shortcut icon" href="../img/favicon.ico">
+<link href="../css/main.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+<div class="container">
+    <h1><img class="icon" src="../img/icon.png"/><div class="brand">Demo Maker</div></h1><br clear="both">
+    <hr>
+	<div class="mod">
+		<h3>Build website</h3>
+		<ol>
+            <li>Dependencies
+            <pre>
+sudo pip install distribute --upgrade
+sudo apt-get install python-setuptools
+sudo pip install setuptools --upgrade
+
+//install http service
+sudo apt-get install nginx
+sudo pip install gunicorn
+sudo pip install -e git+https://github.com/douban/douban-quixote.git#egg=Quixote
+sudo pip install Mako MarkupSafe wsgiref
+
+//install DB
+sudo apt-get install libmysqld-dev mysql-server
+sudo pip install MySQL-python
+sudo pip install -e git+https://github.com/douban/douban-utils.git#egg=DoubanUtils
+sudo pip install -e git+https://github.com/douban/douban-sqlstore.git#egg=DoubanSQLStore
+
+//install image and qrcode libs
+sudo apt-get install libmagickwand-dev
+sudo pip install -e git+https://github.com/dahlia/wand.git#egg=Wand
+sudo pip uninstall PIL
+sudo apt-get install libjpeg-dev libfreetype6-dev zlib1g-dev libpng12-dev libjpeg8-dev
+sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+sudo pip install PIL --upgrade
+sudo pip install Pillow
+sudo apt-get install python-qrencode qrencode</pre>
+            </li>
+            <li>Download sources and setup dirs
+            <pre>
+mkdir /var/demo
+cd /var/demo
+git clone https://github.com/beartung/app-demo-maker.git
+ln -s app-demo-maker/demo-maker demo-maker
+mkdir /data/per</pre>
+            </li>
+            <li>Config and start Mysql, import data: databases/schema.sql, table-screen.sql
+            </li>
+            <li>
+            Config nginx
+            <pre>
+    server {
+
+        listen       80;
+        server_name  demomaker.com;
+        access_log  /var/logs/demo_maker.access.log;
+
+        location ~ ^/static/(img|js|css|fonts|raw)(/|$) {
+            root /var/demo/demo-maker;
+            expires 60d;
+        }
+
+        location ~ ^/per/img {
+            root /data;
+            expires 60d;
+        }
+
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+        }
+    }
+</pre>
+            </li>
+        <li>Config local_config.py
+        <pre>
+SITE = "http://xxx.oo.xx.ooo"
+DOMAIN = ""
+PERM_DIR = '/data/per'
+
+DB_HOST = '127.0.0.1'
+DB_USER = 'demo'
+DB_PASSWORD = 'demo'
+DB_NAME = 'demo'
+</pre>
+        </li>
+        <li>Start to serve
+        <pre>
+sudo /etc/init.d/nginx start
+cd /var/demo/demo-maker
+gunicorn app:app
+</pre>
+        </li>
+        </ol>
+        <br>
+        <h3>Good luck &amp; have fun! <a href="http://beartung.github.io/app-demo-maker/en/index.html" class="rr">Home</a></h3>
+	</div>
+</div>
+<div class="wrapper-footer"></div>
+</div>
+<div class="footer">
+	<div class="container">
+        <a href="https://github.com/beartung/app-demo-maker">DemoMaker</a> by <a href="http://github.com/beartung">@Bear</a>
+	</div>
+</div>
+</body>
+</html>

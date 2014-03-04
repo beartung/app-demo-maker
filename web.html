@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DemoMaker</title>
+<link rel="shortcut icon" href="img/favicon.ico">
+<link href="css/main.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+<div class="container">
+    <h1><img class="icon" src="img/icon.png"/><div class="brand">Demo Maker</div></h1><br clear="both">
+    <hr>
+	<div class="mod">
+		<h3>网站搭建</h3>
+		<ol>
+            <li>安装依赖
+            <pre>
+sudo pip install distribute --upgrade
+sudo apt-get install python-setuptools
+sudo pip install setuptools --upgrade
+
+//安装http服务
+sudo apt-get install nginx
+sudo pip install gunicorn
+sudo pip install -e git+https://github.com/douban/douban-quixote.git#egg=Quixote
+sudo pip install Mako MarkupSafe wsgiref
+
+//安装数据库
+sudo apt-get install libmysqld-dev mysql-server
+sudo pip install MySQL-python
+sudo pip install -e git+https://github.com/douban/douban-utils.git#egg=DoubanUtils
+sudo pip install -e git+https://github.com/douban/douban-sqlstore.git#egg=DoubanSQLStore
+
+//安装图像处理和二维码库
+sudo apt-get install libmagickwand-dev
+sudo pip install -e git+https://github.com/dahlia/wand.git#egg=Wand
+sudo pip uninstall PIL
+sudo apt-get install libjpeg-dev libfreetype6-dev zlib1g-dev libpng12-dev libjpeg8-dev
+sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+sudo pip install PIL --upgrade
+sudo pip install Pillow
+sudo apt-get install python-qrencode qrencode</pre>
+            </li>
+            <li>下载源码，配置目录
+            <pre>
+mkdir /var/demo
+cd /var/demo
+git clone https://github.com/beartung/app-demo-maker.git
+ln -s app-demo-maker/demo-maker demo-maker
+mkdir /data/per</pre>
+            </li>
+            <li>配置启动Mysql，导入数据: databases/schema.sql, table-screen.sql
+            </li>
+            <li>
+            配置nginx
+            <pre>
+    server {
+
+        listen       80;
+        server_name  demomaker.com;
+        access_log  /var/logs/demo_maker.access.log;
+
+        location ~ ^/static/(img|js|css|fonts|raw)(/|$) {
+            root /var/demo/demo-maker;
+            expires 60d;
+        }
+
+        location ~ ^/per/img {
+            root /data;
+            expires 60d;
+        }
+
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+        }
+    }
+</pre>
+            </li>
+        <li>设置local_config.py
+        <pre>
+SITE = "http://xxx.oo.xx.ooo"
+DOMAIN = ""
+PERM_DIR = '/data/per'
+
+DB_HOST = '127.0.0.1'
+DB_USER = 'demo'
+DB_PASSWORD = 'demo'
+DB_NAME = 'demo'
+</pre>
+        </li>
+        <li>启动服务
+        <pre>
+sudo /etc/init.d/nginx start
+cd /var/demo/demo-maker
+gunicorn app:app
+</pre>
+        </li>
+        </ol>
+        <br>
+        <h3>Good luck &amp; have fun! <a href="http://beartung.github.io/app-demo-maker/index.html" class="rr">回文档首页</a></h3>
+	</div>
+</div>
+<div class="wrapper-footer"></div>
+</div>
+<div class="footer">
+	<div class="container">
+        <a href="https://github.com/beartung/app-demo-maker">DemoMaker</a> by <a href="http://github.com/beartung">@Bear</a>
+	</div>
+</div>
+</body>
+</html>
