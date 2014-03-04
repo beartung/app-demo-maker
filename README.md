@@ -86,3 +86,11 @@ sudo /etc/init.d/nginx
 cd /var/demo/demo-maker
 
 gunicorn app:app
+
+##example
+
+Website:  http://211.155.86.90
+
+iPhone Demo Example: http://211.155.86.90/app/4/
+
+Android Demo Example: http://211.155.86.90/app/5/
