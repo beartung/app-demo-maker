@@ -62,7 +62,7 @@ mkdir /data/per
         server_name  demomaker.com;
         access_log  /var/logs/demo_maker.access.log;
 
-        location ~ ^/static/(img|js|css|fonts)(/|$) {
+        location ~ ^/static/(img|js|css|fonts|raw)(/|$) {
             root /var/demo/demo-maker;
             expires 60d;
         }
