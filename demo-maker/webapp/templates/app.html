@@ -27,9 +27,9 @@ from webapp.models.page import Action, Page
             %endif
 
             <a class="btn btn-block btn-success"
-                href="/static/raw/maker.ipa" target="_blank">下载IPA</a>
-            <a class="btn btn-block btn-success"
                 href="http://andariel.douban.com/d/com.demo.maker" target="_blank">下载Apk</a>
+            <a class="btn btn-block btn-success"
+                href="/static/raw/maker.ipa" target="_blank">下载IPA</a>
             <div class="laucher-icon">
                 <a href="${app.path}">
                     <img src="${app.icon}"/>
@@ -62,6 +62,7 @@ from webapp.models.page import Action, Page
         </div>
         <div class="modal fade" id="new-action-dialog" tabindex="-1" role="dialog"></div>
         <div class="modal fade" id="new-page-dialog" tabindex="-1" role="dialog"></div>
+        <div class="modal fade" id="edit-page-dialog" tabindex="-1" role="dialog"></div>
         <script src="/static/js/jquery-1.10.2.min.js"></script>
         <script src="/static/js/bootstrap-3.0.3.min.js"></script>
         <script src="/static/js/messenger.min.js"></script>
@@ -292,9 +293,58 @@ from webapp.models.page import Action, Page
             </a>
             </li>
         </ul>
+        <button type="button" class="btn btn-info btn-edit-page ll"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            data-page-id="${p.id}"
+            title data-original-title="修改"
+            >
+            <i class="glyphicon glyphicon-eject"></i>
+        </button>
     </div>
 </div>
 %endif
+</%def>
+
+<%def name="page_edit_form(page, req)">
+    <form id="edit-form" role="form" enctype="multipart/form-data"
+        class="form-horizontal" method="post" action="/page/${page.id}/edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h2 class="modal-title">修改页面</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <label for="page-name" class="col-sm-2 control-label">
+                    名称
+                </label>
+                <div class="col-sm-10">
+                    <input id="page-edit-name" name="page-name" type="text"
+                    class="form-control"
+                    value="${page.name}">
+                    <span id="page-edit-name-error" style="display:none" class="text-danger">名称不能为空</span>
+                </div>
+            </div>
+             <div class="form-group">
+                <label for="page-photo" class="col-sm-2 control-label">图片</label>
+                <div class="col-sm-10">
+                    <input id="page-edit-photo" name="page-photo" type="file" class="form-control">
+                    <span class="help-block">分辨率为${page.rect.width}x${page.rect.height}
+                    p.s. 如不传图片，则不会修改
+                    </span>
+                    <span id="page-photo-error" style="display:none" class="text-danger">不能为空</span>
+                </div>
+            </div>
+         </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" onclick="check_edit_form()">确定修改</button>
+          </div>
+        </div><!-- /.modal-content -->
+     </div><!-- /.modal-dialog -->
+     </form>
 </%def>
 
 <%def name="page_form(app, rect, parent, page_type)">
@@ -543,6 +593,13 @@ $('#body').delegate('.btn-new-item', 'click', function(){
 
 });
 
+$('#body').delegate('.btn-edit-page', 'click', function(){
+    var page_id = $(this).data('page-id');
+    $('#edit-page-dialog').modal({
+        remote: '/page/'+page_id+'/edit',
+    });
+});
+
 $('#body').delegate('.btn-new-page', 'click', function(){
     var app_id = $(this).data('app-id');
     var page_id = $(this).data('page-id');
@@ -633,6 +690,34 @@ function check_remove(page_id){
     }
 }
 
+function check_edit_form(){
+    page_name = $("#page-edit-name").val();
+    if (page_name == ''){
+        $("#page-edit-name-error").show();
+    }else{
+        $("#page-edit-name-error").hide();
+        var fd = new FormData();
+        var xhr = new XMLHttpRequest();
+        fd.append("output", "json");
+        fd.append("name", $("#page-edit-name").val());
+        if ($("#page-edit-photo").val() != ''){
+            fd.append("photo", $("#page-edit-photo")[0].files[0]);
+        }
+        xhr.open("POST", $("#edit-form").attr("action"), true);
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState === 4) {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    r = JSON.parse(xhr.responseText);
+                    $("#page-list").html(r.html);
+                    $('.page-toolbar .btn').tooltip();
+                }
+            }
+        };
+        xhr.send(fd);
+        $('#edit-page-dialog').modal('hide');
+    }
+}
+
 function check_form(){
     check = true;
     page_name = $("#page-name").val();
@@ -675,7 +760,7 @@ function check_form(){
                     $('.page-toolbar .btn').tooltip();
                 }
             }
-        }; 
+        };
         xhr.send(fd);
         $('#new-page-dialog').modal('hide');
     }

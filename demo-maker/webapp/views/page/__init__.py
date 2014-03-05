@@ -58,6 +58,18 @@ class PageUI(object):
     def __init__(self, req, page):
         self.page = page
 
+    def edit(self, req):
+        name = req.get_form_var("name", "")
+        photo = req.get_form_var("photo", None)
+        app = self.page.app
+        if app.can_admin(req.user):
+            if name and req.get_method() == "POST":
+                filename = photo and photo.tmp_filename
+                self.page.update(name, filename)
+                return json.dumps({'err':'ok', 'html': stf('/app.html', 'page_list', app=app, req=req)})
+            return stf('/app.html', 'page_edit_form', page=self.page, req=req)
+        return AccessError("need owner")
+
     def remove(self, req):
         page = self.page
         app = page.app

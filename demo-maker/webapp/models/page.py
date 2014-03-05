@@ -226,11 +226,12 @@ class Page(object):
                 photo_ver = self.photo_ver + 1
                 data = open(photo_filename).read()
                 rect = self.rect
+                zoomout = self.app.zoomout
                 with Image(blob=data) as img:
                     img.resize(rect.width, rect.height, "catrom")
-                    filestore.save_image(img, "page-photo-%s-%s.jpg" % (id, photo_ver))
+                    filestore.save_image(img, "page-photo-%s-%s.jpg" % (self.id, photo_ver))
                     img.resize(rect.width/zoomout, rect.height/zoomout, "catrom")
-                    filestore.save_image(img, "page-photo-%s-%s.jpg" % (id, photo_ver), "s")
+                    filestore.save_image(img, "page-photo-%s-%s.jpg" % (self.id, photo_ver), "s")
 
                 store.execute("update demo_page set photo_ver=%s, rtime=%s"
                         " where id=%s", (photo_ver, now, self.id))

@@ -176,6 +176,10 @@ a:focus {
     font-size: 18px;
 }
 
+.btn-edit-page{
+    color:#DC151A;
+}
+
 .page-bg {
     text-align: center;
 }
