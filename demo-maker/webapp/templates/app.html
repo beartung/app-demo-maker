@@ -249,19 +249,21 @@ from webapp.models.page import Action, Page
     </button>
     %endif
     <div class="btn-group">
-        <button type="button" class="btn btn-info btn-new-act"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            data-page-id="${p.id}"
-            data-action-type="${Action.TYPE_BACK}"
-            title data-original-title="返回"
-            >
-            <i class="icon-reply"></i>
-        </button>
         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
             <i class="glyphicon glyphicon-chevron-down"></i>
         </button>
         <ul class="dropdown-menu" role="menu">
+            <li>
+            <a class="btn-new-act"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                data-page-id="${p.id}"
+                data-action-type="${Action.TYPE_BACK}"
+                title data-original-title="返回"
+                >
+                <span class="icon-reply"></span>
+                &nbsp;返回
+            </a>
             <li>
             <a class="btn-new-act"
                 data-page-id="${p.id}"
